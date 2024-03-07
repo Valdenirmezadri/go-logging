@@ -244,6 +244,11 @@ func (l *Logger) Infof(format string, args ...interface{}) {
 	l.log(INFO, &format, args...)
 }
 
+// Printf logs a message using INFO as log level.
+func (l *Logger) Printf(format string, args ...interface{}) {
+	l.log(INFO, &format, args...)
+}
+
 // Debug logs a message using DEBUG as log level.
 func (l *Logger) Debug(args ...interface{}) {
 	l.log(DEBUG, nil, args...)
