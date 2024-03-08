@@ -35,6 +35,33 @@ var levelNames = []string{
 	"DEBUG",
 }
 
+func (p Level) New(name string) Level {
+	name = strings.TrimSpace(name)
+
+	if name == CRITICAL.String() {
+		return CRITICAL
+	}
+
+	if name == ERROR.String() {
+		return ERROR
+	}
+
+	if name == WARNING.String() {
+		return WARNING
+	}
+
+	if name == NOTICE.String() {
+		return NOTICE
+	}
+
+	if name == INFO.String() {
+		return INFO
+	}
+
+	return DEBUG
+
+}
+
 // String returns the string representation of a logging level.
 func (p Level) String() string {
 	return levelNames[p]
