@@ -36,7 +36,7 @@ var levelNames = []string{
 }
 
 func (p Level) New(name string) Level {
-	name = strings.TrimSpace(name)
+	name = strings.ToUpper(strings.TrimSpace(name))
 
 	if name == CRITICAL.String() {
 		return CRITICAL
