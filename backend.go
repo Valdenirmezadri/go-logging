@@ -4,8 +4,10 @@
 
 package logging
 
+import "github.com/Valdenirmezadri/core-go/safe"
+
 // defaultBackend is the backend used for all logging calls.
-var defaultBackend LeveledBackend
+var defaultBackend safe.Item[LeveledBackend]
 
 // Backend is the interface which a log backend need to implement to be able to
 // be used as a logging backend.
@@ -23,17 +25,17 @@ func SetBackend(backends ...Backend) LeveledBackend {
 		backend = MultiLogger(backends...)
 	}
 
-	defaultBackend = AddModuleLevel(backend)
-	return defaultBackend
+	defaultBackend.Set(AddModuleLevel(backend))
+	return defaultBackend.Get()
 }
 
 // SetLevel sets the logging level for the specified module. The module
 // corresponds to the string specified in GetLogger.
 func SetLevel(level Level, module string) {
-	defaultBackend.SetLevel(level, module)
+	defaultBackend.Get().SetLevel(level, module)
 }
 
 // GetLevel returns the logging level for the specified module.
 func GetLevel(module string) Level {
-	return defaultBackend.GetLevel(module)
+	return defaultBackend.Get().GetLevel(module)
 }
