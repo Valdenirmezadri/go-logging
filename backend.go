@@ -7,7 +7,7 @@ package logging
 import "github.com/Valdenirmezadri/core-go/safe"
 
 // defaultBackend is the backend used for all logging calls.
-var defaultBackend safe.Item[LeveledBackend]
+var defaultBackend = safe.NewItem[LeveledBackend]()
 
 // Backend is the interface which a log backend need to implement to be able to
 // be used as a logging backend.
