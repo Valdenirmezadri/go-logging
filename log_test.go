@@ -32,11 +32,11 @@ func TestLogCalldepth(t *testing.T) {
 	}
 }
 
-func c(log *Logger) { log.Info("test callpath") }
-func b(log *Logger) { c(log) }
-func a(log *Logger) { b(log) }
+func c(log Logger) { log.Info("test callpath") }
+func b(log Logger) { c(log) }
+func a(log Logger) { b(log) }
 
-func rec(log *Logger, r int) {
+func rec(log Logger, r int) {
 	if r == 0 {
 		a(log)
 		return
