@@ -191,11 +191,11 @@ func Reset() {
 }
 
 // IsEnabledFor returns true if the logger is enabled for the given level.
-func (l logger) IsEnabledFor(level Level) bool {
+func (l *logger) IsEnabledFor(level Level) bool {
 	return defaultBackend.Get().IsEnabledFor(level, l.Module)
 }
 
-func (l logger) log(lvl Level, format *string, args ...interface{}) {
+func (l *logger) log(lvl Level, format *string, args ...interface{}) {
 	if !l.IsEnabledFor(lvl) {
 		return
 	}
@@ -226,99 +226,99 @@ func (l logger) log(lvl Level, format *string, args ...interface{}) {
 }
 
 // Fatal is equivalent to l.Critical(fmt.Sprint()) followed by a call to os.Exit(1).
-func (l logger) Fatal(args ...interface{}) {
+func (l *logger) Fatal(args ...interface{}) {
 	l.log(CRITICAL, nil, args...)
 	os.Exit(1)
 }
 
 // Fatalf is equivalent to l.Critical followed by a call to os.Exit(1).
-func (l logger) Fatalf(format string, args ...interface{}) {
+func (l *logger) Fatalf(format string, args ...interface{}) {
 	l.log(CRITICAL, &format, args...)
 	os.Exit(1)
 }
 
 // Panic is equivalent to l.Critical(fmt.Sprint()) followed by a call to panic().
-func (l logger) Panic(args ...interface{}) {
+func (l *logger) Panic(args ...interface{}) {
 	l.log(CRITICAL, nil, args...)
 	panic(fmt.Sprint(args...))
 }
 
 // Panicf is equivalent to l.Critical followed by a call to panic().
-func (l logger) Panicf(format string, args ...interface{}) {
+func (l *logger) Panicf(format string, args ...interface{}) {
 	l.log(CRITICAL, &format, args...)
 	panic(fmt.Sprintf(format, args...))
 }
 
 // Critical logs a message using CRITICAL as log level.
-func (l logger) Critical(args ...interface{}) {
+func (l *logger) Critical(args ...interface{}) {
 	l.log(CRITICAL, nil, args...)
 }
 
 // Criticalf logs a message using CRITICAL as log level.
-func (l logger) Criticalf(format string, args ...interface{}) {
+func (l *logger) Criticalf(format string, args ...interface{}) {
 	l.log(CRITICAL, &format, args...)
 }
 
 // Error logs a message using ERROR as log level.
-func (l logger) Error(args ...interface{}) {
+func (l *logger) Error(args ...interface{}) {
 	l.log(ERROR, nil, args...)
 }
 
 // Errorf logs a message using ERROR as log level.
-func (l logger) Errorf(format string, args ...interface{}) {
+func (l *logger) Errorf(format string, args ...interface{}) {
 	l.log(ERROR, &format, args...)
 }
 
 // Warning logs a message using WARNING as log level.
-func (l logger) Warning(args ...interface{}) {
+func (l *logger) Warning(args ...interface{}) {
 	l.log(WARNING, nil, args...)
 }
 
 // Warningf logs a message using WARNING as log level.
-func (l logger) Warningf(format string, args ...interface{}) {
+func (l *logger) Warningf(format string, args ...interface{}) {
 	l.log(WARNING, &format, args...)
 }
 
-func (l logger) Warnf(format string, args ...interface{}) {
+func (l *logger) Warnf(format string, args ...interface{}) {
 	l.Warningf(format, args...)
 }
 
 // Notice logs a message using NOTICE as log level.
-func (l logger) Notice(args ...interface{}) {
+func (l *logger) Notice(args ...interface{}) {
 	l.log(NOTICE, nil, args...)
 }
 
 // Noticef logs a message using NOTICE as log level.
-func (l logger) Noticef(format string, args ...interface{}) {
+func (l *logger) Noticef(format string, args ...interface{}) {
 	l.log(NOTICE, &format, args...)
 }
 
 // Info logs a message using INFO as log level.
-func (l logger) Info(args ...interface{}) {
+func (l *logger) Info(args ...interface{}) {
 	l.log(INFO, nil, args...)
 }
 
 // Infof logs a message using INFO as log level.
-func (l logger) Infof(format string, args ...interface{}) {
+func (l *logger) Infof(format string, args ...interface{}) {
 	l.log(INFO, &format, args...)
 }
 
 // Printf logs a message using INFO as log level.
-func (l logger) Printf(format string, args ...interface{}) {
+func (l *logger) Printf(format string, args ...interface{}) {
 	l.log(INFO, &format, args...)
 }
 
 // Debug logs a message using DEBUG as log level.
-func (l logger) Debug(args ...interface{}) {
+func (l *logger) Debug(args ...interface{}) {
 	l.log(DEBUG, nil, args...)
 }
 
 // Debugf logs a message using DEBUG as log level.
-func (l logger) Debugf(format string, args ...interface{}) {
+func (l *logger) Debugf(format string, args ...interface{}) {
 	l.log(DEBUG, &format, args...)
 }
 
-func (l logger) Sub(module string) waLog.Logger {
+func (l *logger) Sub(module string) waLog.Logger {
 	return l
 }
 
